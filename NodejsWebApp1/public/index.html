@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html ng-app="contactApp">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link href="css/materialize.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="content" class="container" ng-controller="contactController">
+        <div class="row section">
+            <div class="input-field col s12 m5">
+                <i class="mdi-action-search prefix"></i>
+                <input type="text" name="search" id="txtSearch" ng-model="searchText" value="" />
+                <label for="txtSearch">Search</label>
+            </div>
+        </div>
+        <div class="row section">
+            <div class="col s12 m5">
+                <div id="contactList" class="list-group" ng-repeat="item in items | filter:searchText">
+                    <div class="row" ng-mouseover="over()" ng-mouseleave="leave()">
+                        <div ng-show="!editZone">
+                            <div class="col s12 m9">
+                                <div><span>Name: </span>{{item.name}}</div>
+                                <div><span>Mobile: </span>{{item.mobile}}</div>
+                                <div><span>Email: </span>{{item.email}}</div>
+                            </div>
+                            <div class="col s12 m3" ng-show="cmdVisible">
+                                <a class="edit" href="javascript:void(0);" ng-click="edit(item);">Edit</a>
+                                <a class="delete" href="javascript:void(0)">Delete</a>
+                            </div>
+
+                        </div>
+                        <div ng-show="editZone">
+                            <!--edit-->
+                            <div class="col s12 m9">
+                                <input type="hidden"  ng-model="editContact._id" />
+                                <div class="input-field">
+                                    <label class="active" for="txtName">Name: </label>
+                                    <input type="text" id="txtName" name="name"  ng-model="editContact.name" />    
+                                </div>
+                                <div class="input-field">
+                                    <label class="active" for="txtMobile">Mobile: </label>
+                                    <input type="text" id="txtMobile" name="mobile"  ng-model="editContact.mobile" />
+                                </div>
+                                <div class="input-field">
+                                    <label class="active" for="txtEmail">Email: </label>
+                                    <input type="email" id="txtEmail" name="email"  ng-model="editContact.email" />
+                                </div>
+                                <div class="">
+                                    <button id="btnUpdate" class="waves-effect waves-light btn" ng-click="update(editContact);">Update</button>
+                                    <button id="btnCancel" class="waves-effect waves-light btn" ng-click="cancel();">Cancel</button>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row section">
+            <div class="add col s12 m3">
+
+                <div class="input-field">
+                    <label for="name">Name:</label>
+                    <input type="text" name="name" id="name" value="" ng-model="newContact.name" class="form-control required" />
+                </div>
+                <div class="input-field">
+                    <label for="mobile">Mobile:</label>
+                    <input type="text" name="mobile" id="mobile" value="" ng-model="newContact.mobile" class="form-control required" />
+                </div>
+                <div class="input-field">
+                    <label for="email">Email:</label>
+                    <input type="email" name="email" id="email" value="" ng-model="newContact.email" class="form-control required email" />
+                </div>
+                <button id="add" class="waves-effect waves-light btn" ng-click="add();">Add</button>
+
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script src="scripts/lib/materialize.min.js"></script>
+    <script src="scripts/app.js"></script>
+</body>
+</html>
