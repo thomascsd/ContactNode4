@@ -4,10 +4,7 @@
 
 var Contact = require('../models/contactModel');
 
-/*
- * @desc:取得資料
- * 
- */
+/** 取得資料 */
 function getContacts(req, res) {
     Contact.find(function (error, contacts) {
         if (error) {
@@ -17,7 +14,7 @@ function getContacts(req, res) {
     });
 }
 
-//新增資料
+/** 新增資料 */
 function saveContacts(req, res) {
     var contact = new Contact({
         name: req.body.name,
@@ -33,6 +30,7 @@ function saveContacts(req, res) {
     })
 }
 
+/** 修改資料 */
 function modifyContacts(req, res) {
     Contact.update({_id: req.params.id}, {
         name: req.body.name,
@@ -49,6 +47,7 @@ function modifyContacts(req, res) {
     });
 }
 
+/** 刪除資料 */
 function deleteContacs(req, res) {
     Contact.remove({_id: req.params.id}, function (errors) {
         res.json({'': 'ok'});
